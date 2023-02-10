@@ -32,7 +32,7 @@ export default function Home() {
       // update methods
       const nftContract = new Contract(NFT_CONTRACT_ADDRESS, abi, signer);
       // call the presaleMint from the contract, only whitelisted addresses would be able to mint
-      const tx = await nftContract.presaleMint({
+      const tx = await nftContract.preSaleMint({
         // value signifies the cost of one crypto dev which is "0.01" eth.
         // We are parsing `0.01` string to ether using the utils library from ethers.js
         value: utils.parseEther("0.01"),
@@ -123,7 +123,7 @@ export default function Home() {
       // have read-only access to the Contract
       const nftContract = new Contract(NFT_CONTRACT_ADDRESS, abi, provider);
       // call the presaleStarted from the contract
-      const _presaleStarted = await nftContract.presaleStarted();
+      const _presaleStarted = await nftContract.isPreSaleStarted();
       if (!_presaleStarted) {
         await getOwner();
       }
@@ -148,7 +148,7 @@ export default function Home() {
       // have read-only access to the Contract
       const nftContract = new Contract(NFT_CONTRACT_ADDRESS, abi, provider);
       // call the presaleEnded from the contract
-      const _presaleEnded = await nftContract.presaleEnded();
+      const _presaleEnded = await nftContract.endDate();
       // _presaleEnded is a Big Number, so we are using the lt(less than function) instead of `<`
       // Date.now()/1000 returns the current time in seconds
       // We compare if the _presaleEnded timestamp is less than the current time
@@ -203,7 +203,7 @@ export default function Home() {
       // have read-only access to the Contract
       const nftContract = new Contract(NFT_CONTRACT_ADDRESS, abi, provider);
       // call the tokenIds from the contract
-      const _tokenIds = await nftContract.tokenIds();
+      const _tokenIds = await nftContract.currTokenCount();
       //_tokenIds is a `Big Number`. We need to convert the Big Number to a string
       setTokenIdsMinted(_tokenIds.toString());
     } catch (err) {

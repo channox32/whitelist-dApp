@@ -38,7 +38,7 @@ contract CryptoDevs is ERC721Enumerable, Ownable {
     function preSaleMint() public payable onlyWhenNotPaused {
         require(isPreSaleStarted && block.timestamp < endDate, "Presale is not running");
         require(whitelist.whitelistedAddresses(msg.sender), "You are not whitelisted");
-        require(maxTokenCount < currTokenCount, "Maximum number of NFT already minted.");
+        require(maxTokenCount > currTokenCount, "Maximum number of NFT already minted.");
         require(msg.value >= _price, "Insufficient Balance");
         currTokenCount++;
 
