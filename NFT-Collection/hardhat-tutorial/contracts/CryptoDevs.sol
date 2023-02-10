@@ -8,7 +8,7 @@ import "./IWhitelist.sol";
 
 contract CryptoDevs is ERC721Enumerable, Ownable {
 
-    string _baseTokenUri;
+    string _baseTokenURI;
     uint256 public _price = 0.01 ether;
     bool public _paused;
     uint256 public maxTokenCount = 20;
@@ -26,7 +26,7 @@ contract CryptoDevs is ERC721Enumerable, Ownable {
     }
 
     constructor (string memory baseURI, address whitelistContract) ERC721("Crypto Devs", "CD") {
-        _baseTokenUri = baseURI;
+        _baseTokenURI = baseURI;
         whitelist = IWhitelist(whitelistContract);
     }
 
@@ -55,7 +55,7 @@ contract CryptoDevs is ERC721Enumerable, Ownable {
     }
 
     function _baseURI() internal view virtual override returns (string memory) {
-        return _baseTokenUri;
+        return _baseTokenURI;
     }
 
     function setPaused(bool val) public onlyOwner {
